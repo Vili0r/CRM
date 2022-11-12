@@ -15,6 +15,7 @@ use App\Models\Deal;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
 
 class DealController extends Controller
 {
@@ -136,5 +137,16 @@ class DealController extends Controller
         $deal->tasks()->create($request->validated());
 
         return Redirect::back()->with('message', 'Task was added successfully!');
+    }
+
+    public function stage(Request $request, Deal $deal)
+    {
+        $deal->update([
+            'stage' => $request->stage
+        ]);
+
+        $deal->save();
+
+        return Redirect::back()->with('message', 'Stage was changed successfully!');
     }
 }

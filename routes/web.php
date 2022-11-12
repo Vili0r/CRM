@@ -37,6 +37,9 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     //Home Controller
     Route::get('home', HomeController::class)->name('home');
 
+    //Update Deal Stage
+    Route::put('/deals/{deal}/stage', [DealController::class, 'stage']);
+
     //Create tasks and notes for Contacts 
     Route::post('/contacts/{contact}/note', [ContactController::class, 'note'])->name('contacts.note');
     Route::post('/contacts/{contact}/task', [ContactController::class, 'task'])->name('contacts.task');
