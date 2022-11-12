@@ -6,7 +6,7 @@ const Sidebar = ({ auth }) => {
     <ul className="pt-2 pb-4 space-y-1 text-sm">
         <li className="rounded-sm">
             <Link
-                href={route('dashboard')}
+                href={route('home')}
                 className="flex items-center p-2 space-x-3 rounded-md"
             >
                 <svg

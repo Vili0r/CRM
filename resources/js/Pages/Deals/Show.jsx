@@ -5,9 +5,10 @@ import ContactCard from '@/Components/ContactCard';
 import Timeline from '@/Components/Timeline';
 import Tabs from '@/Components/DealTabs';
 import AccountCard from '@/Components/AccountCard';
+import DealProgress from '@/Components/DealProgress';
 
 const Show = () => {
-  const { deal, newArray } = usePage().props;
+  const { deal, newArray, stages } = usePage().props;
   
   return (
     <AuthenticatedLayout>
@@ -15,6 +16,8 @@ const Show = () => {
 
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+          <DealProgress deal={deal} stages={stages} />
+          
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-4 col-span-1">
                 <div className="lg:sticky relative top-8">

@@ -77,8 +77,9 @@ class DealController extends Controller
 
         $deal->load(['account', 'contact.account']);
         $newArray = Arr::sort($newMerged, 'created_at');
+        $stages = EnumResource::collection(DealStage::cases());
 
-        return Inertia::render('Deals/Show', compact('deal', 'newArray'));
+        return Inertia::render('Deals/Show', compact('deal', 'newArray', 'stages'));
     }
 
     /**

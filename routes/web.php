@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\TaskController;
@@ -32,6 +33,9 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    //Home Controller
+    Route::get('home', HomeController::class)->name('home');
 
     //Create tasks and notes for Contacts 
     Route::post('/contacts/{contact}/note', [ContactController::class, 'note'])->name('contacts.note');

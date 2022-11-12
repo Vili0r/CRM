@@ -7,7 +7,7 @@ enum DealStage: int
     case Appointment_Scheduled = 1; 
     case Qualified_To_Buy = 2; 
     case Presentation_Scheduled = 3;
-    case Decision_Maker_Bought_In = 4;
+    case Decision_Maker = 4;
     case Contract_Sent = 5;
     case Closed_Won = 6;
     case Closed_Lost = 7;
@@ -18,7 +18,7 @@ enum DealStage: int
             self::Appointment_Scheduled => 'Appointment scheduled', 
             self::Qualified_To_Buy => 'Qualified to buy', 
             self::Presentation_Scheduled => 'Presentation scheduled', 
-            self::Decision_Maker_Bought_In => 'Decision maker bought in', 
+            self::Decision_Maker => 'Decision maker', 
             self::Contract_Sent => 'Contract sent',
             self::Closed_Won => 'Closed won',
             self::Closed_Lost => 'Closed lost',
