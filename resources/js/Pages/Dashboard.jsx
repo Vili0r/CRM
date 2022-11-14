@@ -1,12 +1,21 @@
 import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/inertia-react';
+import { Head, usePage } from '@inertiajs/inertia-react';
+import Search from '@/Components/Search';
+
 
 export default function Dashboard(props) {
+    const { searchResults } = usePage().props;
+
     return (
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
+            header={
+                <div className="flex justify-end">
+                    <Search searchResults={searchResults} />
+                </div>
+            }
         >
             <Head title="Dashboard" />
 

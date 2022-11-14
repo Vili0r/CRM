@@ -18,8 +18,7 @@ const Index = () => {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div>
                     <h1 className="mb-8 text-3xl font-bold">Leads</h1>
-                    <div className="flex items-center justify-between mb-6">
-                        <TextInput />
+                    <div className="flex items-center justify-end mb-6">
                         <InertiaLink
                             className="px-3 py-2 bg-indigo-600 hover:bg-orange-400 rounded-lg text-white hover:text-gray-700 focus:outline-none"
                             href={route('leads.create')}
@@ -56,19 +55,29 @@ const Index = () => {
                                     {data.map(({id, full_name, account, source, status, created_at}) => (
                                         <tr className="bg-white border-b hover:bg-gray-50" key={id}>
                                             <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
-                                                {full_name}
+                                                <InertiaLink href={route('leads.show', id)}>
+                                                    {full_name}
+                                                </InertiaLink>
                                             </th>
                                             <td className="py-4 px-6">
-                                                {account.name}
+                                                <InertiaLink href={route('leads.show', id)}>
+                                                    {account.name}
+                                                </InertiaLink>
                                             </td>
                                             <td className="py-4 px-6">
-                                                {source.name}
+                                                <InertiaLink href={route('leads.show', id)}>
+                                                    {source.name}
+                                                </InertiaLink>
                                             </td>
                                             <td className="py-4 px-6">
-                                                {status.name}
+                                                <InertiaLink href={route('leads.show', id)}>
+                                                    {status.name}
+                                                </InertiaLink>
                                             </td>
                                             <td className="py-4 px-6">
-                                                {created_at}
+                                                <InertiaLink href={route('leads.show', id)}>
+                                                    {created_at}
+                                                </InertiaLink>
                                             </td>
                                             <td className="py-4 px-6 text-right flex justify-between">
                                                 <InertiaLink href={route('leads.edit', id)} className="font-medium text-indigo-600 hover:underline">Edit</InertiaLink>

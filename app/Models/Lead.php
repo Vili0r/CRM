@@ -28,9 +28,24 @@ class Lead extends Model
         'source' => LeadSource::class,
     ];
 
+    public static $searchable = [
+        'first_name',
+        'last_name',
+    ];
+
     public function getFullNameAttribute()
     {
         return $this->first_name.' '.$this->last_name;
+    }
+
+    public function notes()
+    {
+        return $this->morphMany(Note::class, 'owner');
+    }
+
+    public function tasks()
+    {
+        return $this->morphMany(Task::class, 'owner');
     }
 
     public function account()

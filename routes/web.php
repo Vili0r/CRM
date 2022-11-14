@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealController;
+use App\Http\Controllers\GlobalSearchController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\NoteController;
@@ -47,13 +48,21 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     //Create tasks and notes for Deals 
     Route::post('/deals/{deal}/note', [DealController::class, 'note'])->name('deals.note');
     Route::post('/deals/{deal}/task', [DealController::class, 'task'])->name('deals.task');
+    
+    //Create tasks and notes for Leads 
+    Route::post('/leads/{lead}/note', [LeadController::class, 'note'])->name('leads.note');
+    Route::post('/leads/{lead}/task', [LeadController::class, 'task'])->name('leads.task');
 
+    //CRUD Resources
     Route::resource('/accounts', AccountController::class);
     Route::resource('/contacts', ContactController::class);
     Route::resource('/leads', LeadController::class);
     Route::resource('/notes', NoteController::class)->only(['store', 'update', 'destroy']);
     Route::resource('/tasks', TaskController::class)->only(['store', 'update', 'destroy']);
     Route::resource('/deals', DealController::class);
+
+    //Global Search
+    Route::get('/search', [GlobalSearchController::class, 'search'])->name('global.search');
 });
 
 

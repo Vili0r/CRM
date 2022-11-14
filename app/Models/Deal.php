@@ -28,6 +28,10 @@ class Deal extends Model
         'close_date' => 'datetime:Y-m-d'
     ];
 
+    public static $searchable = [
+        'name'
+    ];
+
     public function notes()
     {
         return $this->morphMany(Note::class, 'owner');

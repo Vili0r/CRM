@@ -5,7 +5,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 
-const ContactCreate = ({ id }) => {
+const Deal = ({ id }) => {
     const { data, setData, post, processing, errors } = useForm({
         title: '',
         details: '',
@@ -14,7 +14,7 @@ const ContactCreate = ({ id }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('contacts.task', id));
+        post(route('deals.task', id));
 
         setData({ ...data,
             title: '',
@@ -73,4 +73,4 @@ const ContactCreate = ({ id }) => {
   )
 }
 
-export default ContactCreate
+export default Deal

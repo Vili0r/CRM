@@ -5,7 +5,7 @@ import { useForm } from '@inertiajs/inertia-react';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 
-const ContactCreate = ({ id }) => {
+const Contact = ({ id }) => {
     const { data, setData, post, processing, errors } = useForm({
         content: '',
     });
@@ -18,7 +18,7 @@ const ContactCreate = ({ id }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('deals.note', id));
+        post(route('contacts.note', id));
 
         setData({ ...data,
             content: ''
@@ -48,4 +48,4 @@ const ContactCreate = ({ id }) => {
   )
 }
 
-export default ContactCreate
+export default Contact

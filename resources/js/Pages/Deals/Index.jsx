@@ -18,8 +18,7 @@ const Index = () => {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div>
                     <h1 className="mb-8 text-3xl font-bold">Deals</h1>
-                    <div className="flex items-center justify-between mb-6">
-                        <TextInput />
+                    <div className="flex items-center justify-end mb-6">
                         <InertiaLink
                             className="px-3 py-2 bg-indigo-600 hover:bg-orange-400 rounded-lg text-white hover:text-gray-700 focus:outline-none"
                             href={route('deals.create')}

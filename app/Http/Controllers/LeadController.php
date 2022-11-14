@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use App\Enums\LeadStatus;
 use App\Http\Resources\EnumResource;
+use Illuminate\Support\Arr;
+use App\Http\Requests\StoreNoteRequest;
+use App\Http\Requests\StoreTaskRequest;
 
 class LeadController extends Controller
 {
@@ -62,7 +65,22 @@ class LeadController extends Controller
      */
     public function show(Lead $lead)
     {
-        //
+        $tasksCollection = collect($lead->load(['tasks']));
+        $notesCollection = collect($lead->load(['notes']));
+        
+        $collection = $tasksCollection->merge($notesCollection);
+        $merged = $collection->all();
+        $tasks = $merged['tasks'];
+        $notes = $merged['notes'];
+        
+        $newMerged = array_merge($tasks, $notes);
+
+        $lead->load(['account']);
+        $newArray = Arr::sort($newMerged, 'created_at');
+        $statuses = EnumResource::collection(LeadStatus::cases());
+        $sources = EnumResource::collection(LeadSource::cases());
+
+        return Inertia::render('Leads/Show', compact('lead', 'newArray', 'statuses', 'sources'));
     }
 
     /**
@@ -105,5 +123,19 @@ class LeadController extends Controller
         $lead->delete();
 
         return Redirect::route('leads.index')->with('message', 'Lead deleted successfully!');
+    }
+
+    public function note(StoreNoteRequest $request, Lead $lead)
+    {
+        $lead->notes()->create($request->validated());
+
+        return Redirect::back()->with('message', 'Note was added successfully!');
+    }
+    
+    public function task(StoreTaskRequest $request, Lead $lead)
+    {
+        $lead->tasks()->create($request->validated());
+
+        return Redirect::back()->with('message', 'Task was added successfully!');
     }
 }

@@ -23,6 +23,12 @@ class Contact extends Model
         'user_id',
     ];
 
+    public static $searchable = [
+        'first_name',
+        'last_name',
+        'email',
+    ];
+
     public function account()
     {
         return $this->belongsTo(Account::class);

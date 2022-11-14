@@ -13,7 +13,7 @@ const IconSuccess = () => (
     </svg>
 );
 
-export default function AuthenticatedLayout({ children }) {
+export default function AuthenticatedLayout({ children, header }) {
     const { auth, flash } = usePage().props;
     const [visible, setVisible] = useState(false);
 
@@ -40,6 +40,13 @@ export default function AuthenticatedLayout({ children }) {
             </div>
             <div className="container mx-auto bg-gray-100">
                 <Navigation auth={auth} />
+
+                {header && (
+                    <header className="bg-white shadow">
+                        <div className="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">{header}</div>
+                    </header>
+                )}
+
                 {flash.message && visible && (
                     <div className="mb-8 m-12 flex items-center justify-between bg-green-500 rounded max-w-7xl">
                         <div className="flex items-center">

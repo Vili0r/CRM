@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Note from '@/Pages/Notes/ContactCreate';
-import Task from '@/Pages/Tasks/ContactCreate';
+import Note from '@/Pages/Notes/Contact';
+import Task from '@/Pages/Tasks/Contact';
 
 const ContactTabs = ({ contact }) => {
     const [toggelTab, setToggleTab] = useState(1);

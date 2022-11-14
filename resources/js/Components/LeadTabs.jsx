@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Note from '@/Pages/Notes/Deal';
-import Task from '@/Pages/Tasks/Deal';
+import Note from '@/Pages/Notes/Lead';
+import Task from '@/Pages/Tasks/Lead';
 
-const ContactTabs = ({ deal }) => {
+const ContactTabs = ({ lead }) => {
     const [toggelTab, setToggleTab] = useState(1);
 
     const activateTab = (index) => {
@@ -60,10 +60,10 @@ const ContactTabs = ({ deal }) => {
         </div>
         <div className="relative mt-4 rounded-xl bg-white">
             <div className={toggelTab === 1 ? "tab-panel p-6 transition duration-300 h-76" : "absolute top-0 p-6 invisible opacity-0 tab-panel transition duration-300"}>
-                <Note id={deal.id} />
+                <Note id={lead.id} />
             </div>
             <div className={toggelTab === 2 ? "tab-panel p-6 transition duration-300" : "absolute top-0 p-6 invisible opacity-0 tab-panel transition duration-300"}>
-                <Task id={deal.id} />
+                <Task id={lead.id} />
             </div>
             <div className={toggelTab === 3 ? "tab-panel p-6 transition duration-300" : "absolute top-0 p-6 invisible opacity-0 tab-panel transition duration-300"}>
                 <h2 className="text-xl font-semibold text-gray-800">Third tab</h2>

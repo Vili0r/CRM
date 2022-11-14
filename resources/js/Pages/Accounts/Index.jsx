@@ -1,7 +1,6 @@
 import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, InertiaLink, usePage, Link } from '@inertiajs/inertia-react';
-import TextInput from '@/Components/TextInput';
 import Pagination from '@/Components/Pagination';
 
 const Index = () => {
@@ -18,8 +17,7 @@ const Index = () => {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div>
                     <h1 className="mb-8 text-3xl font-bold">Accounts</h1>
-                    <div className="flex items-center justify-between mb-6">
-                        <TextInput />
+                    <div className="flex items-center justify-end mb-6">
                         <InertiaLink
                             className="px-3 py-2 bg-indigo-600 hover:bg-orange-400 rounded-lg text-white hover:text-gray-700 focus:outline-none"
                             href={route('accounts.create')}
@@ -56,19 +54,29 @@ const Index = () => {
                                     {data.map(({id, name, industry, city, phone_number, created_at}) => (
                                         <tr className="bg-white border-b hover:bg-gray-50" key={id}>
                                             <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
-                                                {name}
+                                                <InertiaLink href={route('accounts.show', id)}>
+                                                    {name}
+                                                </InertiaLink>
                                             </th>
                                             <td className="py-4 px-6">
-                                                {industry}
+                                                <InertiaLink href={route('accounts.show', id)}>
+                                                    {industry}
+                                                </InertiaLink>
                                             </td>
                                             <td className="py-4 px-6">
-                                                {city}
+                                                <InertiaLink href={route('accounts.show', id)}>
+                                                    {city}
+                                                </InertiaLink>
                                             </td>
                                             <td className="py-4 px-6">
-                                                {phone_number}
+                                                <InertiaLink href={route('accounts.show', id)}>
+                                                    {phone_number}
+                                                </InertiaLink>
                                             </td>
                                             <td className="py-4 px-6">
-                                                {created_at}
+                                                <InertiaLink href={route('accounts.show', id)}>
+                                                    {created_at}
+                                                </InertiaLink>
                                             </td>
                                             <td className="py-4 px-6 text-right flex justify-between">
                                                 <InertiaLink href={route('accounts.edit', id)} className="font-medium text-indigo-600 hover:underline">Edit</InertiaLink>

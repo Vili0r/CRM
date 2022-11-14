@@ -19,6 +19,10 @@ class Account extends Model
         'post_code',
     ];
 
+    public static $searchable = [
+        'name'
+    ];
+
     public function contacts()
     {
         return $this->hasMany(Contact::class);
