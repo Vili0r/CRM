@@ -1,48 +1,48 @@
 import React from 'react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, InertiaLink, useForm, usePage } from '@inertiajs/inertia-react';
+import { useForm } from '@inertiajs/inertia-react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 
-const Create = () => {
-  const { accounts, stages } = usePage().props;
-  const { data, setData, post, processing, errors } = useForm({
-    name: '',
-    pipeline: '',
-    stage: '',
-    amount: '',
-    probability: '',
-    close_date: '',
-    contact_id: '',
-    account_id: '',
-  });
+const Modal = ({ setOpenModal, accountId, stages, id }) => {
+    const { data, setData, post, processing, errors } = useForm({
+        name: '',
+        pipeline: '',
+        stage: '',
+        amount: '',
+        probability: '',
+        close_date: '',
+        account_id: accountId,
+    });
 
-  const submit = (e) => {
-    e.preventDefault();
-    post(route('deals.store'));
-  };
+    const submit = (e) => {
+        e.preventDefault();
+        post(route('contacts.deal', id));
 
+        setOpenModal(false);
+    };
+    
   return (
-    <AuthenticatedLayout>
-      <Head title="Deals | Create" />
-
-      <div className="py-12">
-        <div className="max-w-3xl mx-auto sm:px-6 lg:px-8">
-            <h1 className="mb-8 text-3xl font-bold">
-              <InertiaLink
-                className="text-indigo-600 hover:text-orange-400 no-underline focus:outline-none"
-                href={route('deals.index')}
-              > 
-                Deals
-              </InertiaLink>
-              <span className="font-medium text-indigo-600" > /</span> Create
-            </h1>
-              <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div className="p-6 bg-white border-b border-gray-200">
-                  <form onSubmit={submit}>
-                      <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+    //Backdrop
+    <div className="flex justify-center items-center bg-black/50 fixed left-0 top-0 bottom-0 right-0 z-10">
+        {/* Dialog  */}
+        <div className="w-3/4 md:w-1/2 bg-white rounded-lg">
+            {/* Modal Title  */}
+            <div className="py-2 px-4 flex justify-between bg-gray-200 rounded-t-lg">
+                <h2 className="text-lg semi-bold">
+                    Convert a Contact to a Deal
+                </h2>
+                <button onClick={() => {setOpenModal(false)}}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            {/* Modal body  */}
+            <div className="h-full p-4">
+                <form onSubmit={submit}>
+                    <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                         <div>
                             <InputLabel forInput="name" value="Name" />
                             <TextInput
@@ -117,7 +117,7 @@ const Create = () => {
                             />
                             <InputError message={errors.close_date} className="mt-2" />
                         </div>
-                        <div>
+                        <div className="hidden">
                             <InputLabel forInput="account_id" value="Account" />
                             <select
                                 name="account_id"
@@ -125,29 +125,28 @@ const Create = () => {
                                 className="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                                 onChange={e => setData('account_id', e.target.value)}
                             >
-                                <option value="">Select an Account</option>
-                                {accounts.map(({ id, name }) => (
-                                    <option key={id} value={id}>
-                                        {name}
-                                    </option>
-                                ))}
+                                <option value="">{data.account_id}</option>
+                                
                             </select>
                             <InputError message={errors.account_id} className="mt-2" />
                         </div>
-                      </div>
-
-                      <div className="flex items-center justify-end mt-4">
-                          <PrimaryButton className="ml-4 hover:bg-sky-600 bg-orange-400" processing={processing}>
-                              Save
-                          </PrimaryButton>
-                      </div>
-                  </form>
-                </div>
+                    </div>
+                    <div className="flex items-center justify-end mt-4 gap-2">
+                        <button
+                            onClick={() => {setOpenModal(false)}}
+                            className="font-medium px-2 py-2 rounded-lg text-white hover:bg-orange-400 bg-sky-900"
+                        >
+                            Cancel
+                        </button>
+                        <PrimaryButton className="font-medium px-2 py-3 rounded-lg text-white hover:bg-sky-900 bg-orange-400" processing={processing}>
+                            Save
+                        </PrimaryButton>
+                    </div>
+                </form>
             </div>
         </div>
-      </div>
-    </AuthenticatedLayout>
+    </div>
   )
 }
 
-export default Create
+export default Modal

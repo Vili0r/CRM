@@ -11,10 +11,13 @@ use App\Models\Lead;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use App\Enums\LeadStatus;
-use App\Http\Resources\EnumResource;
 use Illuminate\Support\Arr;
 use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\StoreTaskRequest;
+use App\Enums\DealStage;
+use App\Http\Requests\StoreDealRequest;
+use App\Http\Resources\EnumResource;
+use App\Models\Contact;
 
 class LeadController extends Controller
 {
@@ -79,8 +82,9 @@ class LeadController extends Controller
         $newArray = Arr::sort($newMerged, 'created_at');
         $statuses = EnumResource::collection(LeadStatus::cases());
         $sources = EnumResource::collection(LeadSource::cases());
+        $stages = EnumResource::collection(DealStage::cases());
 
-        return Inertia::render('Leads/Show', compact('lead', 'newArray', 'statuses', 'sources'));
+        return Inertia::render('Leads/Show', compact('lead', 'newArray', 'stages'));
     }
 
     /**
@@ -137,5 +141,12 @@ class LeadController extends Controller
         $lead->tasks()->create($request->validated());
 
         return Redirect::back()->with('message', 'Task was added successfully!');
+    }
+
+    public function deal(StoreDealRequest $request, Lead $lead)
+    {
+        $lead->deals()->create($request->validated());
+
+        return Redirect::back()->with('message', 'Deal was added successfully!');
     }
 }

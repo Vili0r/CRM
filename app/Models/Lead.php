@@ -55,6 +55,6 @@ class Lead extends Model
 
     public function deals()
     {
-        return $this->hasMany(Deal::class);
+        return $this->morphMany(Deal::class, 'convert');
     }
 }

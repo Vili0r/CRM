@@ -48,4 +48,9 @@ class Contact extends Model
     {
         return $this->morphMany(Task::class, 'owner');
     }
+
+    public function deals()
+    {
+        return $this->morphMany(Deal::class, 'convert');
+    }
 }

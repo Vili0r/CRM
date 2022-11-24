@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\GlobalSearchController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\TaskController;
@@ -40,10 +41,14 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 
     //Update Deal Stage
     Route::put('/deals/{deal}/stage', [DealController::class, 'stage']);
+    
+    //Send Invoice
+    Route::post('/invoices/{invoice}/send', [InvoiceController::class, 'send'])->name('invoices.send');
 
     //Create tasks and notes for Contacts 
     Route::post('/contacts/{contact}/note', [ContactController::class, 'note'])->name('contacts.note');
     Route::post('/contacts/{contact}/task', [ContactController::class, 'task'])->name('contacts.task');
+    Route::post('/contacts/{contact}/deal', [ContactController::class, 'deal'])->name('contacts.deal');
     
     //Create tasks and notes for Deals 
     Route::post('/deals/{deal}/note', [DealController::class, 'note'])->name('deals.note');
@@ -52,6 +57,7 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     //Create tasks and notes for Leads 
     Route::post('/leads/{lead}/note', [LeadController::class, 'note'])->name('leads.note');
     Route::post('/leads/{lead}/task', [LeadController::class, 'task'])->name('leads.task');
+    Route::post('/leads/{lead}/deal', [LeadController::class, 'deal'])->name('leads.deal');
 
     //CRUD Resources
     Route::resource('/accounts', AccountController::class);
@@ -60,6 +66,7 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::resource('/notes', NoteController::class)->only(['store', 'update', 'destroy']);
     Route::resource('/tasks', TaskController::class)->only(['store', 'update', 'destroy']);
     Route::resource('/deals', DealController::class);
+    Route::resource('/invoices', InvoiceController::class)->except(['edit', 'update']);
 
     //Global Search
     Route::get('/search', [GlobalSearchController::class, 'search'])->name('global.search');

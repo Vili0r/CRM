@@ -30,8 +30,7 @@ class UpdateDealRequest extends FormRequest
             'amount' => ['required', 'numeric'],
             'probability' => ['required', 'numeric'],
             'close_date' => ['required'],
-            'account_id' => ['required'],
-            'contact_id' => ['required'],
+            'account_id' => ['sometimes'],
         ];
     }
 }

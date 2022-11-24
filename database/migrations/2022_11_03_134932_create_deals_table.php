@@ -21,9 +21,9 @@ return new class extends Migration
             $table->string('amount');
             $table->string('probability');
             $table->timestamp('close_date');
-            $table->foreignId('account_id')->constrained();
-            $table->foreignId('contact_id')->constrained();
+            $table->foreignId('account_id')->nullable()->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->morphs('convert');
             $table->timestamps();
         });
     }

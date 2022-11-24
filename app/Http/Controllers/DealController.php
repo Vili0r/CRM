@@ -26,7 +26,7 @@ class DealController extends Controller
      */
     public function index()
     {
-        $deals = DealResource::collection(Deal::with(['account', 'contact'])->paginate(10));
+        $deals = DealResource::collection(Deal::with(['account', 'convert'])->paginate(10));
 
         return Inertia::render('Deals/Index', compact('deals'));
     }
@@ -39,10 +39,9 @@ class DealController extends Controller
     public function create()
     {
         $accounts = Account::all();
-        $contacts = Contact::all();
         $stages = EnumResource::collection(DealStage::cases());
 
-        return Inertia::render('Deals/Create', compact('accounts', 'stages', 'contacts'));
+        return Inertia::render('Deals/Create', compact('accounts', 'stages'));
     }
 
     /**
@@ -76,7 +75,8 @@ class DealController extends Controller
         
         $newMerged = array_merge($tasks, $notes);
 
-        $deal->load(['account', 'contact.account']);
+        //$deal = new DealResource($deal);
+        $deal->load(['account', 'convert.account']);
         $newArray = Arr::sort($newMerged, 'created_at');
         $stages = EnumResource::collection(DealStage::cases());
 
@@ -122,7 +122,7 @@ class DealController extends Controller
     {
         $deal->delete();
 
-        return Redirect::route('deals.index')->with('message', 'Deal sdeleted successfully!');
+        return Redirect::route('deals.index')->with('message', 'Deal deleted successfully!');
     }
 
     public function note(StoreNoteRequest $request, Deal $deal)

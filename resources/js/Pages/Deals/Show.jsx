@@ -6,10 +6,11 @@ import Timeline from '@/Components/Timeline';
 import Tabs from '@/Components/DealTabs';
 import AccountCard from '@/Components/AccountCard';
 import DealProgress from '@/Components/DealProgress';
+import LeadCard from '@/Components/LeadCard';
 
 const Show = () => {
   const { deal, newArray, stages } = usePage().props;
-  
+ 
   return (
     <AuthenticatedLayout>
       <Head title="Deals | Show" />
@@ -33,7 +34,12 @@ const Show = () => {
                         </InertiaLink>
                     </div>
                   <AccountCard account={deal.account} />
-                  <ContactCard contact={deal.contact} />
+                  {deal.convert?.source 
+                    ?
+                    <LeadCard lead={deal.convert} /> 
+                    :
+                    <ContactCard contact={deal.convert} />
+                  }
                 </div>
             </div>
             <div className="lg:col-span-8 col-span-1">

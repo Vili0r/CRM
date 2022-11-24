@@ -60,7 +60,7 @@ const Sidebar = ({ auth }) => {
                 <span>Leads</span>
             </InertiaLink>
         </li>
-        <li className="rounded-sm">
+        <li className="rounded-sm mb-5">
             <InertiaLink
                 href={route('deals.index')}
                 className="flex items-center p-2 space-x-3 rounded-md"
@@ -72,7 +72,20 @@ const Sidebar = ({ auth }) => {
                 <span>Deals</span>
             </InertiaLink>
         </li>
+
         <hr className="my-6 border-gray-200 dark:border-gray-600" />
+
+        <li className="rounded-sm mt-5">
+            <InertiaLink
+                href={route('invoices.index')}
+                className="flex items-center p-2 space-x-3 rounded-md"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" />
+                </svg>
+                <span>Invoices</span>
+            </InertiaLink>
+        </li>
 
         <li className="rounded-sm">
             <Link

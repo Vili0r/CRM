@@ -19,8 +19,9 @@ class Deal extends Model
         'probability',
         'close_date',
         'account_id',
-        'contact_id',
         'user_id',
+        'convert_id',
+        'convert_type',
     ];
 
     protected $casts = [
@@ -31,6 +32,11 @@ class Deal extends Model
     public static $searchable = [
         'name'
     ];
+
+    public function convert()
+    {
+        return $this->morphTo();
+    }
 
     public function notes()
     {
@@ -45,10 +51,5 @@ class Deal extends Model
     public function account()
     {
         return $this->belongsTo(Account::class);
-    }
-
-    public function contact()
-    {
-        return $this->belongsTo(Contact::class);
     }
 }

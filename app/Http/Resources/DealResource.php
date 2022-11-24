@@ -24,13 +24,10 @@ class DealResource extends JsonResource
             'close_date' => $this->close_date->toDateTimeString(),
             // 'notes' => NoteResource::collection($this->notes),
             // 'tasks' => TaskResource::collection($this->tasks),
-            'account' => [
-                'id' => $this->account->id ?? '',
-                'name' => $this->account->name ?? '',
-            ],
-            'contact' => [
-                'id' => $this->contact->id ?? '',
-                'name' => $this->contact->full_name ?? '',
+            'account' => $this->account,
+            'convert' => [
+                $this->convert,
+                'full_name' => $this->convert->first_name.' '.$this->convert->last_name
             ],
             'created_at' => $this->created_at->toDateTimeString(),
         ];

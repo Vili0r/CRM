@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DealStage;
 use App\Http\Requests\StoreContactRequest;
+use App\Http\Requests\StoreDealRequest;
 use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateContactRequest;
 use App\Http\Resources\ContactResource;
+use App\Http\Resources\EnumResource;
 use App\Models\Account;
 use App\Models\Contact;
 use Inertia\Inertia;
@@ -72,9 +75,9 @@ class ContactController extends Controller
 
         $contact->load(['account']);
         $newArray = Arr::sort($newMerged, 'created_at');
-        //dd($newArray);
+        $stages = EnumResource::collection(DealStage::cases());
 
-        return Inertia::render('Contacts/Show', compact('contact', 'newArray'));
+        return Inertia::render('Contacts/Show', compact('contact', 'newArray', 'stages'));
     }
 
     /**
@@ -129,5 +132,12 @@ class ContactController extends Controller
         $contact->tasks()->create($request->validated());
 
         return Redirect::back()->with('message', 'Task was added successfully!');
+    }
+    
+    public function deal(StoreDealRequest $request, Contact $contact)
+    {
+        $contact->deals()->create($request->validated());
+
+        return Redirect::back()->with('message', 'Deal was added successfully!');
     }
 }
